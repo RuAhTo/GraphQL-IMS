@@ -1,0 +1,116 @@
+# Get all products
+query {
+  products {
+    id
+    name
+    sku
+  }
+}
+
+# Get product by ID
+query {
+  product(id: "example-product-id") {
+    id
+    name
+    sku
+    price
+    amountInStock
+  }
+}
+
+# Get total stock value
+query {
+  totalStockValue
+}
+
+# Get total stock value by manufacturer
+query {
+  totalStockValueByManufacturer {
+    manufacturer
+    totalValue
+  }
+}
+
+# Get low stock products
+query {
+  lowStockProducts {
+    id
+    name
+    amountInStock
+  }
+}
+
+# Get critical stock products
+query {
+  criticalStockProducts {
+    id
+    name
+    amountInStock
+    manufacturerName
+    contactName
+    contactPhone
+    contactEmail
+  }
+}
+
+# Get all manufacturers
+query {
+  manufacturers {
+    name
+    country
+    contact {
+      name
+      email
+    }
+  }
+}
+
+# Add product
+mutation {
+  addProduct(
+    input: {
+      name: "MacBook Pro"
+      sku: "MBP-512-2024"
+      description: "14-inch MacBook Pro with M3 chip"
+      price: 1999.99
+      category: "Laptops"
+      amountInStock: 10
+      manufacturer: {
+        name: "Apple Inc."
+        country: "USA"
+        website: "https://apple.com"
+        description: "Tech company"
+        address: "One Apple Park Way, Cupertino, CA"
+        contact: {
+          name: "Tim Cook"
+          email: "tim@apple.com"
+          phone: "+1-800-275-2273"
+        }
+      }
+    }
+  ) {
+    id
+    name
+  }
+}
+
+# Update product
+mutation {
+  updateProduct(
+    id: "example-product-id"
+    input: {
+      name: "MacBook Pro Updated"
+      price: 1899.99
+      amountInStock: 12
+    }
+  ) {
+    id
+    name
+    price
+  }
+}
+
+# Delete product
+mutation {
+  deleteProduct(id: "example-product-id")
+}
